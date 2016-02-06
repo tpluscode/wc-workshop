@@ -1,4 +1,18 @@
 <template id="wc-note">
+    <style>
+        :host {
+            width: 300px;
+            border: dotted 2px black;
+            padding: 5px;
+            margin: 5px;
+        }
+
+        h2 {
+            color: blue;
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        }
+    </style>
+
     <h2>Notatka 3</h2>
     <p>
         Lorem ipsum dolor sit amet
@@ -17,7 +31,9 @@
         var template = doc.getElementById("wc-note");
         var node = document.importNode(template.content,true);
 
-        this.appendChild(node);
+        var shadowRoot = this.createShadowRoot();
+        shadowRoot.appendChild(node);
+
         this.noteHeader = this.getAttribute('note-header');
         this.noteText = this.getAttribute('note-text');
     };
@@ -63,11 +79,11 @@
 
     function setHeader(newVal) {
         console.log(this);
-        this.querySelector('h2').textContent = newVal;
+        this.shadowRoot.querySelector('h2').textContent = newVal;
     }
 
     function setText(newVal) {
-        this.querySelector('p').textContent = newVal;
+        this.shadowRoot.querySelector('p').textContent = newVal;
     }
 
     document.registerElement('wc-note',{

@@ -4,14 +4,11 @@
     <meta charset="UTF-8">
     <title>WC Workshop</title>
     <style>
-        wc-note {
-            width: 300px;
-            border: dotted 2px black;
-            padding: 5px;
-            margin: 5px;
+        p {
+            text-decoration: underline;
         }
 
-        body {
+        #notes {
             display: flex;
         }
     </style>
@@ -19,12 +16,21 @@
 </head>
 <body>
 
-<wc-note note-header="Notatka 1" note-text="Lorem ipsum 1">
-</wc-note>
-<wc-note note-header="Notatka 2" note-text="Lorem ipsum 2">
-</wc-note>
-<wc-note note-header="Notatka 3" note-text="Lorem ipsum 3">
-</wc-note>
+<header>
+    <h1>My WC notes</h1>
+    <p>
+        My WC notes description
+    </p>
+</header>
+
+<section id="notes">
+    <wc-note note-header="Notatka 1" note-text="Lorem ipsum 1">
+    </wc-note>
+    <wc-note note-header="Notatka 2" note-text="Lorem ipsum 2">
+    </wc-note>
+    <wc-note note-header="Notatka 3" note-text="Lorem ipsum 3">
+    </wc-note>
+</section>
 
 </body>
 </html>

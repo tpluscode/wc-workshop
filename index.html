@@ -18,6 +18,18 @@
     <link href="./dist/bundle.js">
 </head>
 <body>
+
+  <template id="wc-note">
+    <h2>Notatka 3</h2>
+    <p>
+        Lorem ipsum dolor sit amet
+    </p>
+    <nav>
+        <a href="">Popraw</a>
+        <a href="">Usuń</a>
+    </nav>
+  </template>
+
 <wc-note>
 </wc-note>
 <div class="wc-note">
@@ -40,21 +52,12 @@
         <a href="">Usuń</a>
     </nav>
 </div>
-
 <script>
-
     var WcNote = Object.create(HTMLElement.prototype);
-
     WcNote.createdCallback = function() {
-        var header = document.createElement('h2');
-        header.textContent = 'Notatka 1';
-
-        var content = document.createElement('p');
-        content.textContent = 'Lorem ipsum dolor sit amet';
-
-        this.appendChild(header);
-        this.appendChild(content);
-        this.insertAdjacentHTML('beforeend', '<nav><a href="">Popraw</a> <a href="">Usuń</a></nav>');
+        var template=document.getElementById("wc-note");
+        var node = document.importNode(template.content,true);
+        this.appendChild(node);
     };
 
     WcNote.attachedCallback = function() {

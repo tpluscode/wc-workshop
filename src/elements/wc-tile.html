@@ -1,0 +1,41 @@
+<template id="wc-tile">
+    <style>
+        :host {
+            display: block;
+            border: dotted 2px black;
+            padding: 5px;
+            margin: 5px;
+        }
+
+        ::content#nav .risky {
+            color: red;
+        }
+    </style>
+
+    <header>
+        <content select=".header"></content>
+    </header>
+
+    <content select=".note-content"></content>
+
+    <content id="nav" select="nav"></content>
+</template>
+
+<script>
+    (function(){
+        var doc = document.currentScript.ownerDocument;
+
+        var WcTile = Object.create(HTMLElement.prototype);
+        WcTile.createdCallback = function () {
+            var template = doc.querySelector('#wc-tile');
+            var node = document.importNode(template.content, true);
+
+            var shadowRoot = this.createShadowRoot();
+            shadowRoot.appendChild(node);
+        };
+
+        document.registerElement('wc-tile', {
+            prototype: WcTile
+        });
+    })();
+</script>

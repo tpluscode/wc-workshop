@@ -16,6 +16,7 @@
             display: flex;
         }
     </style>
+    <link href="bower_components/polymer/polymer.html" rel="import">
     <link href="elements/wc-note.html" rel="import">
 </head>
 <body>
@@ -28,7 +29,7 @@
 </header>
 
 <section id="notes">
-    <wc-note note-header="Notatka 1" note-text="Lorem ipsum 1">
+    <wc-note note-header="Notatka 1" note-text='{ "dupa": 1 }'>
         <p>
             Lorem ipsum Light DOM
         </p>

@@ -29,33 +29,21 @@
     </nav>
 </template>
 
-<wc-note>
+<wc-note header-title="Notatka 1">
 </wc-note>
-<div class="wc-note">
-    <h2>Notatka 2</h2>
-    <p>
-        Lorem ipsum dolor sit amet
-    </p>
-    <nav>
-        <a href="">Popraw</a>
-        <a href="">Usuń</a>
-    </nav>
-</div>
-<div class="wc-note">
-    <h2>Notatka 3</h2>
-    <p>
-        Lorem ipsum dolor sit amet
-    </p>
-    <nav>
-        <a href="">Popraw</a>
-        <a href="">Usuń</a>
-    </nav>
-</div>
+<wc-note header-title="Notatka 2">
+</wc-note>
+<wc-note header-title="Notatka 3">
+</wc-note>
+
 <script>
     var WcNote = Object.create(HTMLElement.prototype);
     WcNote.createdCallback = function() {
         var template=document.getElementById("wc-note");
         var node = document.importNode(template.content,true);
+
+        node.querySelector('h2').textContent = this.getAttribute('header-title');
+
         this.appendChild(node);
     };
 
@@ -69,8 +57,10 @@
 
     };
 
-    WcNote.attributeChangedCallback = function(attributeName, newVal, oldVal){
-
+    WcNote.attributeChangedCallback = function(attributeName, oldVal, newVal){
+        if(attributeName === 'header-title') {
+            this.querySelector('h2').textContent = newVal;
+        }
     };
 
     document.registerElement('wc-note',{

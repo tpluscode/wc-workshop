@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>WC Workshop</title>
     <style>
-        .wc-note {
+        wc-note, .wc-note {
             width: 300px;
             border: dotted 2px black;
             padding: 5px;
@@ -15,19 +15,22 @@
             display: flex;
         }
     </style>
-    <link href="./dist/bundle.js">
 </head>
 <body>
-<div class="wc-note">
-    <h2>Notatka 1</h2>
-    <p>sss
+
+<template id="wc-note">
+    <h2>Notatka 3</h2>
+    <p>
         Lorem ipsum dolor sit amet
     </p>
     <nav>
         <a href="">Popraw</a>
         <a href="">Usuń</a>
     </nav>
-</div>
+</template>
+
+<wc-note>
+</wc-note>
 <div class="wc-note">
     <h2>Notatka 2</h2>
     <p>
@@ -48,5 +51,32 @@
         <a href="">Usuń</a>
     </nav>
 </div>
+<script>
+    var WcNote = Object.create(HTMLElement.prototype);
+    WcNote.createdCallback = function() {
+        var template=document.getElementById("wc-note");
+        var node = document.importNode(template.content,true);
+        this.appendChild(node);
+    };
+
+    WcNote.attachedCallback = function() {
+        window.setTimeout(function(){
+            console.log('attaching wc-note: ', this);
+        }.bind(this), 100);
+    };
+
+    WcNote.detachedCallback = function () {
+
+    };
+
+    WcNote.attributeChangedCallback = function(attributeName, newVal, oldVal){
+
+    };
+
+    document.registerElement('wc-note',{
+        prototype: WcNote
+    });
+
+</script>
 </body>
 </html>

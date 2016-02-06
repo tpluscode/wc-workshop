@@ -35,7 +35,10 @@
             noteHeader: {
                 type: String
             },
-            noteText: String
+            noteText: {
+                type: String,
+                notify: true
+            }
         },
         ready: function(){
           this.editMode = false;

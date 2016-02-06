@@ -11,19 +11,19 @@
         </style>
 
         <wc-tile>
-            <h2 class="header">{{noteHeader}}</h2>
+            <h2 class="header">{{note.header}}</h2>
 
             <section class="note-content">
-                <marked-element hidden$="[[editMode]]" markdown="{{noteText}}">
+                <marked-element hidden$="[[editMode]]" markdown="{{note.text}}">
                     <div class="markdown-html"></div>
                 </marked-element>
-                <textarea hidden$="[[!editMode]]" id="textArea" value="{{noteText::change}}"></textarea>
+                <textarea hidden$="[[!editMode]]" id="textArea" value="{{note.text::change}}"></textarea>
             </section>
 
             <nav>
                 <a href="javascript:void(0)" on-tap="toggleEditNote" hidden$="[[editMode]]">Popraw</a>
                 <a href="javascript:void(0)" on-tap="toggleEditNote" hidden$="[[!editMode]]">Zapisz</a>
-                <a class="risky" href="javascript:void(0)">Usuń</a>
+                <a class="risky" href="javascript:void(0)" on-tap="deleteNote">Usuń</a>
             </nav>
         </wc-tile>
 
@@ -35,11 +35,8 @@
     Polymer({
         is: 'wc-note',
         properties: {
-            noteHeader: {
-                type: String
-            },
-            noteText: {
-                type: String,
+            note: {
+                type: Object,
                 notify: true
             }
         },
@@ -48,6 +45,9 @@
         },
         toggleEditNote: function(){
             this.editMode = !this.editMode;
+        },
+        deleteNote: function(){
+            this.fire('delete', this.note);
         },
         attached: function() {
             window.setTimeout(function () {

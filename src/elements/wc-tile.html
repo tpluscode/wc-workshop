@@ -23,7 +23,7 @@
 
 <script>
     (function(){
-        var doc = document.currentScript.ownerDocument;
+        var doc = (document._currentScript || document.currentScript).ownerDocument;
 
         var WcTile = Object.create(HTMLElement.prototype);
         WcTile.createdCallback = function () {

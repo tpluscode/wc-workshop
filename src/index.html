@@ -29,17 +29,30 @@
 </header>
 
 <section id="notes">
-    <wc-note note-header="Notatka 1" note-text='{ "dupa": 1 }'>
-        <p>
-            Lorem ipsum Light DOM
-        </p>
-        <a href="">extra link</a>
-    </wc-note>
-    <wc-note note-header="Notatka 2" note-text="Lorem ipsum 2">
-    </wc-note>
-    <wc-note note-header="Notatka 3" note-text="Lorem ipsum 3">
-    </wc-note>
+    <template id="notesTemplate" is="dom-bind">
+        <template is="dom-repeat" items="{{notes}}">
+            <wc-note note-header="{{item.header}}" note-text='{{item.text}}'>
+            </wc-note>
+        </template>
+    </template>
 </section>
+
+<script>
+    document.querySelector('#notesTemplate').notes = [
+        {
+            header: 'Notatka 1',
+            text: 'Lorem ipsum 1'
+        },
+        {
+            header: 'Notatka 2',
+            text: 'Lorem ipsum 2'
+        },
+        {
+            header: 'Notatka 4',
+            text: 'Lorem ipsum 4'
+        }
+    ];
+</script>
 
 </body>
 </html>

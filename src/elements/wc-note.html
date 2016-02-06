@@ -13,12 +13,14 @@
             <h2 class="header">{{noteHeader}}</h2>
 
             <section class="note-content">
-                <p>{{noteText}}</p>
+                <p hidden$="[[editMode]]">{{noteText}}</p>
+                <textarea hidden$="[[!editMode]]" id="textArea" value="{{noteText::change}}"></textarea>
             </section>
 
             <nav>
-                <a href="">Popraw</a>
-                <a class="risky" href="">Usuń</a>
+                <a href="javascript:void(0)" on-tap="toggleEditNote" hidden$="[[editMode]]">Popraw</a>
+                <a href="javascript:void(0)" on-tap="toggleEditNote" hidden$="[[!editMode]]">Zapisz</a>
+                <a class="risky" href="javascript:void(0)">Usuń</a>
             </nav>
         </wc-tile>
 
@@ -34,6 +36,12 @@
                 type: String
             },
             noteText: String
+        },
+        ready: function(){
+          this.editMode = false;
+        },
+        toggleEditNote: function(){
+            this.editMode = !this.editMode;
         },
         attached: function() {
             window.setTimeout(function () {

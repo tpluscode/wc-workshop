@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>WC Workshop</title>
     <style>
-        .wc-note {
+        wc-note, .wc-note {
             width: 300px;
             border: dotted 2px black;
             padding: 5px;
@@ -17,16 +17,8 @@
     </style>
 </head>
 <body>
-<div class="wc-note">
-    <h2>Notatka 1</h2>
-    <p>
-        Lorem ipsum dolor sit amet
-    </p>
-    <nav>
-        <a href="">Popraw</a>
-        <a href="">Usuń</a>
-    </nav>
-</div>
+<wc-note>
+</wc-note>
 <div class="wc-note">
     <h2>Notatka 2</h2>
     <p>
@@ -47,5 +39,31 @@
         <a href="">Usuń</a>
     </nav>
 </div>
+
+<script>
+
+    var WcNote = Object.create(HTMLElement.prototype);
+
+    WcNote.createdCallback = function() {
+
+    };
+
+    WcNote.attachedCallback = function() {
+
+    };
+
+    WcNote.detachedCallback = function () {
+
+    };
+
+    WcNote.attributeChangedCallback = function(attributeName, newVal, oldVal){
+
+    };
+
+    document.registerElement('wc-note',{
+        prototype: WcNote
+    });
+
+</script>
 </body>
 </html>

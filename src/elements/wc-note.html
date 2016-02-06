@@ -1,0 +1,77 @@
+<template id="wc-note">
+    <h2>Notatka 3</h2>
+    <p>
+        Lorem ipsum dolor sit amet
+    </p>
+    <nav>
+        <a href="">Popraw</a>
+        <a href="">Usuń</a>
+    </nav>
+</template>
+
+<script>
+    var doc = document.currentScript.ownerDocument;
+
+    var WcNote = Object.create(HTMLElement.prototype);
+    WcNote.createdCallback = function() {
+        var template = doc.getElementById("wc-note");
+        var node = document.importNode(template.content,true);
+
+        this.appendChild(node);
+        this.noteHeader = this.getAttribute('note-header');
+        this.noteText = this.getAttribute('note-text');
+    };
+
+    WcNote.attachedCallback = function() {
+        window.setTimeout(function(){
+            console.log('attaching wc-note: ', this);
+        }.bind(this), 100);
+    };
+
+    WcNote.detachedCallback = function () {
+
+    };
+
+    WcNote.attributeChangedCallback = function(attributeName, oldVal, newVal){
+        if(attributeName === 'note-header') {
+            setHeader.call(this, newVal);
+        }
+        else if(attributeName === 'note-text') {
+            setText.call(this, newVal);
+        }
+    };
+
+    Object.defineProperty(WcNote, 'noteHeader', {
+        get: function() {
+            return this.noteHeaderValue;
+        },
+        set: function(newVal) {
+            setHeader.call(this, newVal);
+            this.noteHeaderValue = newVal;
+        }
+    });
+
+    Object.defineProperty(WcNote, 'noteText', {
+        get: function() {
+            return this.noteTextValue;
+        },
+        set: function(newVal) {
+            setText.call(this, newVal);
+            this.noteTextValue = newVal;
+        }
+    });
+
+    function setHeader(newVal) {
+        console.log(this);
+        this.querySelector('h2').textContent = newVal;
+    }
+
+    function setText(newVal) {
+        this.querySelector('p').textContent = newVal;
+    }
+
+    document.registerElement('wc-note',{
+        prototype: WcNote
+    });
+
+</script>

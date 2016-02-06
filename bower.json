@@ -17,6 +17,7 @@
     "tests"
   ],
   "dependencies": {
-    "polymer": "~1.2.4"
+    "polymer": "~1.2.4",
+    "marked-element": "PolymerElements/marked-element#~1.1.3"
   }
 }

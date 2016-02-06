@@ -1,4 +1,5 @@
 <link rel="import" href="wc-tile.html"/>
+<link rel="import" href="../bower_components/marked-element/marked-element.html" />
 
 <dom-module id="wc-note">
     <template>
@@ -13,7 +14,9 @@
             <h2 class="header">{{noteHeader}}</h2>
 
             <section class="note-content">
-                <p hidden$="[[editMode]]">{{noteText}}</p>
+                <marked-element hidden$="[[editMode]]" markdown="{{noteText}}">
+                    <div class="markdown-html"></div>
+                </marked-element>
                 <textarea hidden$="[[!editMode]]" id="textArea" value="{{noteText::change}}"></textarea>
             </section>
 

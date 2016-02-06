@@ -1,0 +1,56 @@
+<link href="wc-note.html" rel="import">
+
+<dom-module id="wc-note-list">
+    <template>
+        <style>
+            wc-note {
+                width: 300px;
+            }
+
+            #notes {
+                display: flex;
+                flex-wrap: wrap;
+            }
+        </style>
+
+        <section id="notes">
+            <template is="dom-repeat" items="{{notes}}">
+                <wc-note note="{{item}}"
+                         on-note-changed="saveNote"
+                         on-delete="deleteNote">
+                </wc-note>
+            </template>
+        </section>
+
+        <div>
+            <button on-tap="addNote">Add note</button>
+        </div>
+    </template>
+</dom-module>
+
+<script>
+
+    Polymer({
+        is: 'wc-note-list',
+        properties: {
+            notes: {
+                type: Array,
+                notify: true
+            }
+        },
+        deleteNote: function (e, note) {
+            var indexOf = this.notes.indexOf(note);
+            this.splice('notes', indexOf, 1);
+        },
+        saveNote: function (e, val) {
+            console.log('saving note', e.target.note);
+        },
+        addNote: function() {
+            this.push('notes', {
+                text: '',
+                header: 'New Note'
+            });
+        }
+    });
+
+</script>

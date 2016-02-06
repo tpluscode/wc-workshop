@@ -7,17 +7,9 @@
         p {
             text-decoration: underline;
         }
-
-        wc-note {
-            width: 300px;
-        }
-
-        #notes {
-            display: flex;
-        }
     </style>
     <link href="bower_components/polymer/polymer.html" rel="import">
-    <link href="elements/wc-note.html" rel="import">
+    <link href="elements/wc-note-list.html" rel="import">
 </head>
 <body>
 
@@ -28,30 +20,11 @@
     </p>
 </header>
 
-<section id="notes">
-    <template id="notesTemplate" is="dom-bind">
-        <template id="repeater" is="dom-repeat" items="{{notes}}">
-            <wc-note note="{{item}}"
-                     on-note-changed="saveNote"
-                     on-delete="deleteNote">
-            </wc-note>
-        </template>
-    </template>
-</section>
+<wc-note-list id="notes"></wc-note-list>
 
 <script>
 
-    document.querySelector('#notesTemplate').saveNote = function(e, val) {
-        console.log('saving note', e.target.note);
-    };
-
-    document.querySelector('#notesTemplate').deleteNote = function(e, note) {
-        var indexOf = this.notes.indexOf(note);
-        this.notes.splice(indexOf, 1);
-        document.querySelector('#repeater').render();
-    };
-
-    document.querySelector('#notesTemplate').notes = [
+    document.querySelector('#notes').notes = [
         {
             header: 'Notatka 1',
             text: 'Lorem ipsum 1'

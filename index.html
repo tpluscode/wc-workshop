@@ -45,11 +45,21 @@
     var WcNote = Object.create(HTMLElement.prototype);
 
     WcNote.createdCallback = function() {
+        var header = document.createElement('h2');
+        header.textContent = 'Notatka 1';
 
+        var content = document.createElement('p');
+        content.textContent = 'Lorem ipsum dolor sit amet';
+
+        this.appendChild(header);
+        this.appendChild(content);
+        this.insertAdjacentHTML('beforeend', '<nav><a href="">Popraw</a> <a href="">Usuń</a></nav>');
     };
 
     WcNote.attachedCallback = function() {
-
+        window.setTimeout(function(){
+            console.log('attaching wc-note: ', this);
+        }.bind(this), 100);
     };
 
     WcNote.detachedCallback = function () {

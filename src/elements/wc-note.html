@@ -11,7 +11,8 @@
         </style>
 
         <wc-tile>
-            <h2 class="header">{{note.header}}</h2>
+            <h2 class="header" hidden$="[[editMode]]">{{note.header}}</h2>
+            <input type="text" class="header" hidden$="[[!editMode]]" value="{{note.header::input}}" />
 
             <section class="note-content">
                 <marked-element hidden$="[[editMode]]" markdown="{{note.text}}">
@@ -44,6 +45,10 @@
           this.editMode = false;
         },
         toggleEditNote: function(){
+            if(this.editMode){
+                this.fire('save', this.note);
+            }
+
             this.editMode = !this.editMode;
         },
         deleteNote: function(){

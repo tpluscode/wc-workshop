@@ -16,7 +16,7 @@
         <section id="notes">
             <template is="dom-repeat" items="{{notes}}">
                 <wc-note note="{{item}}"
-                         on-note-changed="saveNote"
+                         on-save="saveNote"
                          on-delete="deleteNote">
                 </wc-note>
             </template>
@@ -42,8 +42,8 @@
             var indexOf = this.notes.indexOf(note);
             this.splice('notes', indexOf, 1);
         },
-        saveNote: function (e, val) {
-            console.log('saving note', e.target.note);
+        saveNote: function (e, note) {
+            console.log('saving note', note);
         },
         addNote: function() {
             this.push('notes', {

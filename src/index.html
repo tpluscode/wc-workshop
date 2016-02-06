@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>WC Workshop</title>
     <style>
-        wc-note, .wc-note {
+        wc-note {
             width: 300px;
             border: dotted 2px black;
             padding: 5px;
@@ -29,11 +29,11 @@
     </nav>
 </template>
 
-<wc-note header-title="Notatka 1">
+<wc-note note-header="Notatka 1" note-text="Lorem ipsum 1">
 </wc-note>
-<wc-note header-title="Notatka 2">
+<wc-note note-header="Notatka 2" note-text="Lorem ipsum 2">
 </wc-note>
-<wc-note header-title="Notatka 3">
+<wc-note note-header="Notatka 3" note-text="Lorem ipsum 3">
 </wc-note>
 
 <script>
@@ -42,9 +42,9 @@
         var template=document.getElementById("wc-note");
         var node = document.importNode(template.content,true);
 
-        node.querySelector('h2').textContent = this.getAttribute('header-title');
-
         this.appendChild(node);
+        this.noteHeader = this.getAttribute('note-header');
+        this.noteText = this.getAttribute('note-text');
     };
 
     WcNote.attachedCallback = function() {
@@ -58,10 +58,42 @@
     };
 
     WcNote.attributeChangedCallback = function(attributeName, oldVal, newVal){
-        if(attributeName === 'header-title') {
-            this.querySelector('h2').textContent = newVal;
+        if(attributeName === 'note-header') {
+            setHeader.call(this, newVal);
+        }
+        else if(attributeName === 'note-text') {
+            setText.call(this, newVal);
         }
     };
+
+    Object.defineProperty(WcNote, 'noteHeader', {
+        get: function() {
+            return this.noteHeaderValue;
+        },
+        set: function(newVal) {
+            setHeader.call(this, newVal);
+            this.noteHeaderValue = newVal;
+        }
+    });
+
+    Object.defineProperty(WcNote, 'noteText', {
+        get: function() {
+            return this.noteTextValue;
+        },
+        set: function(newVal) {
+            setText.call(this, newVal);
+            this.noteTextValue = newVal;
+        }
+    });
+
+    function setHeader(newVal) {
+        console.log(this);
+        this.querySelector('h2').textContent = newVal;
+    }
+
+    function setText(newVal) {
+        this.querySelector('p').textContent = newVal;
+    }
 
     document.registerElement('wc-note',{
         prototype: WcNote

@@ -8,6 +8,7 @@
             text-decoration: underline;
         }
     </style>
+    <script src="https://polygit.org/components/webcomponentsjs/webcomponents.js"></script>
     <link href="bower_components/polymer/polymer.html" rel="import">
     <link href="elements/wc-note-list.html" rel="import">
 </head>
@@ -24,20 +25,24 @@
 
 <script>
 
-    document.querySelector('#notes').notes = [
-        {
-            header: 'Notatka 1',
-            text: 'Lorem ipsum 1'
-        },
-        {
-            header: 'Notatka 2',
-            text: 'Lorem ipsum 2'
-        },
-        {
-            header: 'Notatka 4',
-            text: 'Lorem ipsum 4'
-        }
-    ];
+    window.addEventListener('WebComponentsReady', function(){
+
+        document.querySelector('#notes').notes = [
+            {
+                header: 'Notatka 1',
+                text: 'Lorem ipsum 1'
+            },
+            {
+                header: 'Notatka 2',
+                text: 'Lorem ipsum 2'
+            },
+            {
+                header: 'Notatka 4',
+                text: 'Lorem ipsum 4'
+            }
+        ];
+
+    });
 </script>
 
 </body>
